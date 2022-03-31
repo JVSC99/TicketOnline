@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/app_bar.dart';
+import 'components/profile_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

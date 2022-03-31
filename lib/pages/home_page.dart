@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ticket_online/repositories/aluno_repository.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,6 +14,8 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final lista = AlunoRepository.lista;
+
     return Scaffold(
       appBar: AppBar(
           title: Column(
@@ -24,7 +27,7 @@ class HomePageState extends State<HomePage> {
           ),
           Row(
             children: [
-              Text('Olá'),
+              Text(lista[0].nome),
             ],
           )
         ],
