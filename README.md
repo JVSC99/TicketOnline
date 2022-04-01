@@ -10,7 +10,7 @@ Descrição:
 
 Projeto voltado para automatização de um problema real, diversas faculdades tem seus Restaurantes Universitários porém para se a realizar uma refeição é necessário, comprar um ticket de papel e entrega-lo no momento que vai consumir.
 
-O app tem como Objetivo funcionar como bilhete de ônibus onde podemos carregar com quantidades de tickets.
+O app tem como Objetivo funcionar como um bilhete de ônibus onde podemos carregar com quantidades de tickets, porém voltado para a alimentação dos estudantes nos restaurantes universitários.
 
 Erros e ajustes faltantes:
 
