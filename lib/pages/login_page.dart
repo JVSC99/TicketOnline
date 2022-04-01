@@ -102,7 +102,10 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.all(32.0),
                 child: MaterialButton(
                   onPressed: () {
-                    LoginController(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return HomePage();
+                    }));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
