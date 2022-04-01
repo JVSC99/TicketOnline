@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-Container Saldo(BuildContext context, double saldo) {
-  double saldo_conta = saldo;
+Container Saldo(BuildContext context, int saldo) {
+  int saldo_conta = saldo;
   return Container(
     child: Padding(
       padding: EdgeInsets.symmetric(vertical: 24),
@@ -16,7 +16,7 @@ Container Saldo(BuildContext context, double saldo) {
                 textScaleFactor: 5,
               ),
               Text(
-                'Seu saldo',
+                'Seus Tickets',
                 textScaleFactor: 1,
               ),
             ],

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_online/model/aluno.dart';
-import 'package:ticket_online/pages/components/comprar_ticket.dart';
+import 'package:ticket_online/pages/comprar_page.dart';
 import 'package:ticket_online/pages/components/saldo.dart';
-import 'package:ticket_online/pages/components/wallet.dart';
+import 'package:ticket_online/pages/pagar_pages.dart';
 import 'package:ticket_online/pages/profile_page.dart';
+import 'package:ticket_online/pages/wallet_page.dart';
 import 'package:ticket_online/repositories/aluno_repository.dart';
 
 class HomePage extends StatefulWidget {
@@ -57,36 +58,29 @@ class HomePageState extends State<HomePage> {
           ),
           body: TabBarView(
             children: [
-              buildPage(lista[0].carteira.saldo, 'Wallet'),
-              buildPage(lista[0].carteira.saldo, 'Pagar'),
-              buildPage(lista[0].carteira.saldo, 'Comprar'),
+              buildPage('Wallet'),
+              buildPage('Pagar'),
+              buildPage('Comprar'),
             ],
           )),
     );
   }
 
-  Widget buildPage(double saldo, String text) {
+  Widget buildPage(String text) {
     if (text == 'Wallet') {
-      return Wallet(context, saldo);
+      return WalletPage();
     }
     if (text == 'Pagar') {
-      return Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Saldo(context, saldo),
-          ],
-        ),
-      );
+      return PagarPage();
     }
     if (text == 'Comprar') {
-      return Comprar(context, saldo);
+      return ComprarPage();
     }
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
-        children: [Saldo(context, saldo)],
+        children: [Saldo(context, 0)],
       ),
     );
   }
