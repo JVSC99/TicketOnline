@@ -14,7 +14,5 @@ O app tem como Objetivo funcionar como bilhete de ônibus onde podemos carregar 
 
 Erros e ajustes faltantes:
 
-Bugs o sistema está sem autenticação no Login.
-
 Funcionalidades a serem implementadas leitura de QR code para pagamamento do ticket, integração e criação de banco de dados e a criação de algumas regras de negócio.
 
