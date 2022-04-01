@@ -1,16 +1,20 @@
 # ticket_online
 
-A new Flutter project.
+Grupo de integrantes:
 
-## Getting Started
+João Victor Carvalho.
+Alyson Victor.
+Peretto.
 
-This project is a starting point for a Flutter application.
+Descrição:
 
-A few resources to get you started if this is your first Flutter project:
+Projeto voltado para automatização de um problema real, diversas faculdades tem seus Restaurantes Universitários porém para se a realizar uma refeição é necessário, comprar um ticket de papel e entrega-lo no momento que vai consumir.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+O app tem como Objetivo funcionar como bilhete de ônibus onde podemos carregar com quantidades de tickets.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Erros e ajustes faltantes:
+
+Bugs o sistema está sem autenticação no Login.
+
+Funcionalidades a serem implementadas leitura de QR code para pagamamento do ticket, integração e criação de banco de dados e a criação de algumas regras de negócio.
+
