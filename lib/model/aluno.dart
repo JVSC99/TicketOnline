@@ -7,11 +7,14 @@ class Aluno {
   String senha;
   Carteira carteira;
   List<Historico> historico;
+  String imagePath;
 
-  Aluno(
-      {required this.nome,
-      required this.ra,
-      required this.senha,
-      required this.carteira,
-      required this.historico});
+  Aluno({
+    required this.nome,
+    required this.ra,
+    required this.senha,
+    required this.carteira,
+    required this.historico,
+    required this.imagePath,
+  });
 }

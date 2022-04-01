@@ -18,6 +18,8 @@ class AlunoRepository {
           Historico(data: '10/03/2022', refeicao: 'Almoço'),
           Historico(data: '09/03/2022', refeicao: 'Jantar'),
           Historico(data: '09/03/2022', refeicao: 'Almoço'),
-        ])
+        ],
+        imagePath:
+            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
   ];
 }
