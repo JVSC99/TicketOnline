@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ticket_online/model/historico.dart';
 import 'package:ticket_online/pages/components/saldo.dart';
 import 'package:ticket_online/repositories/aluno_repository.dart';
 
@@ -12,6 +13,7 @@ class PagarPage extends StatefulWidget {
 
 class PagarPageState extends State<PagarPage> {
   final alunos = AlunoRepository.lista;
+  final date = DateTime.now();
   final _form = GlobalKey<FormState>();
   final _valor = TextEditingController();
   int qtd = 1;
@@ -34,7 +36,21 @@ class PagarPageState extends State<PagarPage> {
                 ),
                 onPressed: () {
                   setState(() {
-                    AlunoRepository.lista[0].carteira.saldo -= qtd;
+                    if (AlunoRepository.lista[0].carteira.saldo > 0) {
+                      AlunoRepository.lista[0].carteira.saldo -= qtd;
+                      AlunoRepository.lista[0].historico.add(
+                        Historico(
+                            data:
+                                '${date.day}/${date.month}/${date.year} ${date.hour - 3}:${date.minute}',
+                            refeicao:
+                                (date.hour - 3 < 14) ? 'Almoço ' : 'Jantar '),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Pagamento realizado com sucesso')));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Saldo insulficiente')));
+                    }
                   });
                 },
                 child: Row(

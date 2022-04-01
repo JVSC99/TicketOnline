@@ -73,6 +73,8 @@ class ComprarPageState extends State<ComprarPage> {
                   if (_form.currentState!.validate()) {
                     setState(() {
                       AlunoRepository.lista[0].carteira.saldo += qtd;
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Compra realizada com sucesso')));
                       qtd = 0;
                     });
                   }

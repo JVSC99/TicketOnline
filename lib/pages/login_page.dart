@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ticket_online/controllers/login_controller.dart';
 import 'package:ticket_online/pages/home_page.dart';
 import 'package:ticket_online/repositories/aluno_repository.dart';
 
@@ -11,6 +10,17 @@ class LoginPage extends StatelessWidget {
   final _form1 = GlobalKey<FormState>();
   final _valor1 = TextEditingController();
   final lista = AlunoRepository.lista;
+  String login = '';
+  String senha = '';
+
+  validar_login(int chave, String login, String senha) {
+    if (AlunoRepository.lista[0].ra == login &&
+        AlunoRepository.lista[0].senha == senha) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +40,9 @@ class LoginPage extends StatelessWidget {
                 child: Form(
                   key: _form1,
                   child: TextFormField(
+                    onChanged: (value1) {
+                      login = (value1.isEmpty) ? '' : (value1);
+                    },
                     keyboardType: TextInputType.number,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     controller: _valor1,
@@ -56,7 +69,6 @@ class LoginPage extends StatelessWidget {
                       } else if (value1 != lista[0].ra) {
                         return 'Senha ou e-mail inválido';
                       }
-                      value1 = '';
                       return null;
                     },
                   ),
@@ -67,6 +79,9 @@ class LoginPage extends StatelessWidget {
                 child: Form(
                   key: _form,
                   child: TextFormField(
+                    onChanged: (value) {
+                      senha = (value.isEmpty) ? '' : (value);
+                    },
                     obscureText: true,
                     controller: _valor,
                     cursorColor: Colors.deepOrange,
@@ -92,7 +107,6 @@ class LoginPage extends StatelessWidget {
                       } else if (value != lista[0].senha) {
                         return 'Senha ou e-mail inválido';
                       }
-                      value = '';
                       return null;
                     },
                   ),
@@ -102,10 +116,19 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.all(32.0),
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return HomePage();
-                    }));
+                    int chave = 0;
+                    chave = (validar_login(chave, login, senha));
+                    if (chave == 1) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Login realizado com sucesso')));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return HomePage();
+                      }));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Senha ou RA inválido')));
+                    }
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),

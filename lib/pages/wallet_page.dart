@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ticket_online/pages/components/saldo.dart';
 import 'package:ticket_online/repositories/aluno_repository.dart';
 
+import 'components/historico.dart';
+
 class WalletPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -33,15 +35,7 @@ class WalletPageState extends State<WalletPage> {
                 ),
               ],
             ),
-            Expanded(
-                child: ListView.separated(
-                    itemBuilder: (BuildContext context, int id) => ListTile(
-                          leading: Text('${lista[0].historico[id].refeicao}'),
-                          trailing: Text('${lista[0].historico[id].data}'),
-                        ),
-                    padding: EdgeInsets.all(24),
-                    separatorBuilder: (_, __) => Divider(),
-                    itemCount: lista[0].historico.length))
+            HistoricoList(context, lista)
           ],
         ),
       ),

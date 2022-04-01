@@ -8,7 +8,7 @@ class AlunoRepository {
         nome: 'João Victor',
         ra: '123',
         senha: '1234',
-        carteira: Carteira(id: 'João_123', saldo: 100),
+        carteira: Carteira(id: 'João_123', saldo: 10),
         historico: [
           Historico(data: '12/03/2022', refeicao: 'Jantar'),
           Historico(data: '12/03/2022', refeicao: 'Almoço'),

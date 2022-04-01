@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ticket_online/pages/components/historico.dart';
+import 'package:ticket_online/pages/comprar_page.dart';
+import 'package:ticket_online/pages/home_page.dart';
 import 'login_page.dart';
 import 'components/app_bar.dart';
 import 'components/profile_widget.dart';
@@ -34,8 +37,11 @@ class ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 24),
           buildName(alunos.last),
           buildRA(alunos.last),
-          const SizedBox(height: 300),
-          buildLogoutButton()
+          Saldo(context, alunos[0].carteira.saldo),
+          SingleChildScrollView(
+              child:
+                  SizedBox(height: 200, child: HistoricoList(context, alunos))),
+          buildLogoutButton(),
         ],
       ),
     );
