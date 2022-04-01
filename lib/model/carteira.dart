@@ -1,5 +1,5 @@
 class Carteira {
-  int saldo;
+  double saldo;
   String id;
 
   Carteira({

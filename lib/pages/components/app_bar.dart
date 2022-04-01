@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-AppBar buildAppBar(BuildContext context) {
-  const icon = Icons.notifications_none;
-
+AppBar buildAppBar(BuildContext context, leading, rightIcon) {
   return AppBar(
-    leading: BackButton(),
+    leading: leading,
     backgroundColor: Colors.transparent,
     elevation: 0,
     actions: [
-      IconButton(onPressed: () {}, icon: Icon(icon)),
+      IconButton(onPressed: () {}, icon: Icon(rightIcon)),
     ],
   );
 }

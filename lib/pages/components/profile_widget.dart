@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import '../../model/aluno.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String imagePath;
