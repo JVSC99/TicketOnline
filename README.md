@@ -4,7 +4,7 @@ Grupo de integrantes:
 
 João Victor Carvalho.
 Alyson Victor.
-Peretto.
+Andrei João Peretto.
 
 Descrição:
 
