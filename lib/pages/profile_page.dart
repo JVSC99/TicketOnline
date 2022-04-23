@@ -27,22 +27,25 @@ class ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Colors.orangeAccent[400],
       appBar: buildAppBar(context, leading, rightAppBaricon),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath: alunos.last.imagePath,
-            onClicked: () async {},
-          ),
-          const SizedBox(height: 24),
-          buildName(alunos.last),
-          buildRA(alunos.last),
-          Saldo(context, alunos[0].carteira.saldo),
-          SingleChildScrollView(
-              child:
-                  SizedBox(height: 200, child: HistoricoList(context, alunos))),
-          buildLogoutButton(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            ProfileWidget(
+              imagePath: alunos[0].imagePath,
+              onClicked: () async {},
+            ),
+            const SizedBox(height: 24),
+            buildName(alunos[0]),
+            buildRA(alunos[0]),
+            Saldo(context, alunos[0].carteira.saldo),
+            SingleChildScrollView(
+                child: SizedBox(
+                    height: 200, child: HistoricoList(context, alunos))),
+            buildLogoutButton(),
+          ],
+        ),
       ),
     );
   }

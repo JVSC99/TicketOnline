@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter/services.dart';
 import 'package:ticket_online/model/historico.dart';
 import 'package:ticket_online/pages/components/saldo.dart';
@@ -18,6 +19,38 @@ class PagarPageState extends State<PagarPage> {
   final _valor = TextEditingController();
   int qtd = 1;
 
+  readQRcode() async {
+    String code = await FlutterBarcodeScanner.scanBarcode(
+      "#FFFFFF",
+      "Cancelar",
+      false,
+      ScanMode.QR,
+    );
+
+    if (code == '10') {
+      setState(() {
+        if (AlunoRepository.lista[0].carteira.saldo > 0) {
+          AlunoRepository.lista[0].carteira.saldo -= qtd;
+          AlunoRepository.lista[0].historico.add(
+            Historico(
+                data:
+                    '${date.day}/${date.month}/${date.year} ${date.hour - 3}:${date.minute}',
+                refeicao: (date.hour - 3 < 14) ? 'Almoço ' : 'Jantar '),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Pagamento realizado com sucesso'),
+            backgroundColor: Colors.green,
+          ));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('Saldo insuficiente'),
+            backgroundColor: Colors.red,
+          ));
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,29 +67,11 @@ class PagarPageState extends State<PagarPage> {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.black),
                 ),
-                onPressed: () {
-                  setState(() {
-                    if (AlunoRepository.lista[0].carteira.saldo > 0) {
-                      AlunoRepository.lista[0].carteira.saldo -= qtd;
-                      AlunoRepository.lista[0].historico.add(
-                        Historico(
-                            data:
-                                '${date.day}/${date.month}/${date.year} ${date.hour - 3}:${date.minute}',
-                            refeicao:
-                                (date.hour - 3 < 14) ? 'Almoço ' : 'Jantar '),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('Pagamento realizado com sucesso')));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Saldo insulficiente')));
-                    }
-                  });
-                },
+                onPressed: readQRcode,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('COMPRAR'),
+                    Text('PAGAR'),
                   ],
                 ),
               ),
@@ -64,7 +79,7 @@ class PagarPageState extends State<PagarPage> {
             Container(
               margin: EdgeInsets.only(top: 16),
               child: Text(
-                '${3.50} BRL (por refeição)',
+                '3.50 BRL (por refeição)',
                 style: TextStyle(fontSize: 20),
               ),
             ),

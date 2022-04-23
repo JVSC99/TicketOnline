@@ -14,8 +14,7 @@ class LoginPage extends StatelessWidget {
   String senha = '';
 
   validar_login(int chave, String login, String senha) {
-    if (AlunoRepository.lista[0].ra == login &&
-        AlunoRepository.lista[0].senha == senha) {
+    if (lista[0].ra == login && lista[0].senha == senha) {
       return 1;
     } else {
       return 0;
@@ -120,14 +119,20 @@ class LoginPage extends StatelessWidget {
                     chave = (validar_login(chave, login, senha));
                     if (chave == 1) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('Login realizado com sucesso')));
+                        content: Text('Login realizado com sucesso'),
+                        backgroundColor: Colors.green,
+                      ));
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return HomePage();
                       }));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Senha ou RA inválido')));
+                        SnackBar(
+                          content: Text('Senha ou RA inválido'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
                     }
                   },
                   shape: RoundedRectangleBorder(
