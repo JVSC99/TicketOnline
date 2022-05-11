@@ -53,6 +53,7 @@ class DB {
   String get _historico => '''
     CREATE TABLE historico (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
+      alunoId INTEGER,
       data TEXT,
       refeicao TEXT
     )
