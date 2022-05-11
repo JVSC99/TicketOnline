@@ -37,8 +37,6 @@ class DB {
       nome TEXT,
       ra TEXT,
       senha TEXT,
-      carteira_id INTEGER,
-      historico_id INTEGER,
       imagePath TEXT
     )
   ''';  
@@ -46,6 +44,7 @@ class DB {
   String get _carteira => '''
     CREATE TABLE carteira (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
+      alunoId INTEGER,
       saldo REAL,
     )
   ''';  
