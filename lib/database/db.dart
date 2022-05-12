@@ -29,6 +29,29 @@ class DB {
     await db.execute(_aluno);
     await db.execute(_carteira);
     await db.execute(_historico);
+    await db.insert(
+      'aluno',
+      {
+        "nome": "Alysson Victor",
+        "ra": "2142341",
+        "senha": "Dev22@22"
+      }
+    );
+    await db.insert(
+      'carteira',
+      {
+        "alunoId": 1,
+        "saldo": 20
+      }
+    );
+    await db.insert(
+      'historico',
+      {
+        "alunoId": 1,
+        "data": "20220511",
+        "refeicao": "almoco"
+      }
+    );
   }
 
   String get _aluno => '''
@@ -38,15 +61,15 @@ class DB {
       ra TEXT,
       senha TEXT,
       imagePath TEXT
-    )
+    );
   ''';  
 
   String get _carteira => '''
     CREATE TABLE carteira (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       alunoId INTEGER,
-      saldo REAL,
-    )
+      saldo REAL
+    );
   ''';  
 
   String get _historico => '''
@@ -55,6 +78,6 @@ class DB {
       alunoId INTEGER,
       data TEXT,
       refeicao TEXT
-    )
+    );
   ''';  
 }
