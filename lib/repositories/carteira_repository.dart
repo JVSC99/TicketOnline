@@ -26,7 +26,7 @@ class CarteiraRepository extends ChangeNotifier {
       return null;
   }
 
-  getByAlunoId (int id) async {
+  findByAlunoId (int id) async {
       db = await DB.instance.database;
 
       List carteira = await db.query('carteira', where: 'id = $id');
