@@ -17,15 +17,15 @@ class AlunoRepository extends ChangeNotifier {
 
   CarteiraRepository carteiraRepository = CarteiraRepository();
 
-  Future<Aluno?> findById (int id) async {
+  Future<Aluno> findById (int id) async {
 
       db = await DB.instance.database;
 
       List alunos = await db.query('aluno', where: 'id = $id');
       
-      Carteira carteira = carteiraRepository.findByAlunoId(id);
+      Carteira carteira = await carteiraRepository.findByAlunoId(id);
 
-      List<Historico> historico = historicoRepository.getByAlunoId(id);
+      List<Historico> historico = await historicoRepository.getByAlunoId(id);
 
       if(alunos.isNotEmpty){
         return createAluno(alunos, carteira, historico);
@@ -48,6 +48,45 @@ class AlunoRepository extends ChangeNotifier {
       }
 
       throw("Não existe aluno com o RA informado");
+  }
+  
+  Future<void> save(Aluno aluno) async{
+    db = await DB.instance.database;      
+
+    try{
+        if(aluno.id != 0){
+
+          Aluno alunoExistente = await findById(aluno.id);
+
+          db.update(
+            'aluno', 
+            {
+              'nome': alunoExistente.nome,
+              'ra': alunoExistente.ra,
+              'senha': alunoExistente.senha
+            },
+            where: 'id = ?',
+            whereArgs: [alunoExistente.id]
+          );
+
+          carteiraRepository.save(aluno.carteira, aluno.id);
+
+          if(aluno.historico.isNotEmpty){
+            for(int i = 0; i < aluno.historico.length; i++){
+              historicoRepository.save(aluno.historico[i], aluno.id);
+            }
+          }
+      }else{
+        int alunoId = await db.insert(
+          'aluno', {
+          'nome': aluno.nome,
+          'ra': aluno.ra,
+          'senha': aluno.senha
+        });
+      }
+    }catch(error){
+        throw(error.toString());  
+    }
   }
 
   createAluno(alunos, carteira, historico) {
