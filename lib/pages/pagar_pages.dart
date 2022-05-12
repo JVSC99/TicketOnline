@@ -33,6 +33,8 @@ class PagarPageState extends State<PagarPage> {
           AlunoRepository.lista[0].carteira.saldo -= qtd;
           AlunoRepository.lista[0].historico.add(
             Historico(
+                id: 1,
+                alunoId: 1,
                 data:
                     '${date.day}/${date.month}/${date.year} ${date.hour - 3}:${date.minute}',
                 refeicao: (date.hour - 3 < 14) ? 'Almoço ' : 'Jantar '),

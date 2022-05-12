@@ -3,22 +3,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ticket_online/pages/home_page.dart';
 import 'package:ticket_online/repositories/aluno_repository.dart';
+import 'package:ticket_online/model/aluno.dart';
 
 class LoginPage extends StatelessWidget {
   final _form = GlobalKey<FormState>();
   final _valor = TextEditingController();
   final _form1 = GlobalKey<FormState>();
   final _valor1 = TextEditingController();
-  final lista = AlunoRepository.lista;
   String login = '';
   String senha = '';
+  AlunoRepository alunoRepository = AlunoRepository();
 
-  validar_login(int chave, String login, String senha) {
-    if (lista[0].ra == login && lista[0].senha == senha) {
-      return 1;
-    } else {
-      return 0;
+  Future<Aluno> validarLogin(String ra, String senha) async {
+    
+    try {
+      Aluno aluno = await alunoRepository.findByRA(ra);
+
+      if(aluno.senha == senha){
+        return aluno;
+      }
+
+    } catch (error) {
+      print(error.toString());
     }
+
+    throw("Senha ou RA inválido");
   }
 
   @override
@@ -65,8 +74,6 @@ class LoginPage extends StatelessWidget {
                     validator: (value1) {
                       if (value1!.isEmpty) {
                         return 'Inserir RA';
-                      } else if (value1 != lista[0].ra) {
-                        return 'Senha ou e-mail inválido';
                       }
                       return null;
                     },
@@ -103,8 +110,6 @@ class LoginPage extends StatelessWidget {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Inserir Senha';
-                      } else if (value != lista[0].senha) {
-                        return 'Senha ou e-mail inválido';
                       }
                       return null;
                     },
@@ -114,19 +119,22 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(32.0),
                 child: MaterialButton(
-                  onPressed: () {
-                    int chave = 0;
-                    chave = (validar_login(chave, login, senha));
-                    if (chave == 1) {
+                  onPressed: () async {
+
+                    try{
+
+                      Aluno aluno = await validarLogin(login, senha);
+
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text('Login realizado com sucesso'),
                         backgroundColor: Colors.green,
                       ));
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return HomePage();
+                          return HomePage(aluno: aluno);
                       }));
-                    } else {
+
+                    }catch (error) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('Senha ou RA inválido'),
