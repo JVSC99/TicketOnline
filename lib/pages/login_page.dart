@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ticket_online/pages/home_page.dart';
-import 'package:ticket_online/repositories/aluno_repository.dart';
 import 'package:ticket_online/model/aluno.dart';
+import 'package:ticket_online/controller/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
   final _form = GlobalKey<FormState>();
@@ -12,24 +11,8 @@ class LoginPage extends StatelessWidget {
   final _valor1 = TextEditingController();
   String login = '';
   String senha = '';
-  AlunoRepository alunoRepository = AlunoRepository();
-
-  Future<Aluno> validarLogin(String ra, String senha) async {
-    
-    try {
-      Aluno aluno = await alunoRepository.findByRA(ra);
-
-      if(aluno.senha == senha){
-        return aluno;
-      }
-
-    } catch (error) {
-      print(error.toString());
-    }
-
-    throw("Senha ou RA inválido");
-  }
-
+  LoginController loginController = LoginController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +106,7 @@ class LoginPage extends StatelessWidget {
 
                     try{
 
-                      Aluno aluno = await validarLogin(login, senha);
+                      Aluno aluno = await loginController.validarLogin(login, senha);
 
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text('Login realizado com sucesso'),
