@@ -17,14 +17,14 @@ class HistoricoRepository extends ChangeNotifier {
        
       if(historico.isNotEmpty){
         return Historico(
-          id: historico[0]['id'],
-          alunoId: historico[0]['alunoId'],
-          data: historico[0]['data'],
-          refeicao: historico[0]['refeicao']
+          id: historico.first['id'],
+          alunoId: historico.first['alunoId'],
+          data: historico.first['data'],
+          refeicao: historico.first['refeicao']
         );
       }
 
-      return null;
+      throw("Não existe carteira com o ID informado");
   }
 
   getByAlunoId (int id) async {
@@ -35,7 +35,7 @@ class HistoricoRepository extends ChangeNotifier {
 
       if(historico.isNotEmpty){
         
-        for(int i = 0; i <= historico.length; i++){
+        for(int i = 0; i < historico.length; i++){
           historicos.add(
               Historico(
                 id: historico[i]['id'],
@@ -49,5 +49,14 @@ class HistoricoRepository extends ChangeNotifier {
       }
       
       return historicos;
+  }
+
+  createHistorico(historico){
+    return Historico(
+        id: historico.first['id'],
+        alunoId: historico.first['alunoId'],
+        data: historico.first['data'],
+        refeicao: historico.first['refeicao']
+    );
   }
 }

@@ -16,14 +16,10 @@ class CarteiraRepository extends ChangeNotifier {
       List carteira = await db.query('carteira', where: 'id = $id');
        
       if(carteira.isNotEmpty){
-        return Carteira(
-          id: carteira[0]['id'],
-          alunoId: carteira[0]['alunoId'],
-          saldo: carteira[0]['saldo']
-        );
+        return createCarteira(carteira);
       }
 
-      return null;
+      throw("Não existe carteira com o ID informado");
   }
 
   findByAlunoId (int id) async {
@@ -32,13 +28,17 @@ class CarteiraRepository extends ChangeNotifier {
       List carteira = await db.query('carteira', where: 'id = $id');
        
       if(carteira.isNotEmpty){
-        return Carteira(
-          id: carteira[0]['id'],
-          alunoId: carteira[0]['alunoId'],
-          saldo: carteira[0]['saldo']
-        );
+        return createCarteira(carteira);
       }
 
-      return null;
+      throw("Não existe carteira com o ID informado");
+  }
+
+  createCarteira(carteira) {
+    return Carteira(
+      id: carteira.first['id'],
+      alunoId: carteira.first['alunoId'],
+      saldo: carteira.first['saldo']
+    );
   }
 }

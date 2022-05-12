@@ -17,23 +17,49 @@ class AlunoRepository extends ChangeNotifier {
 
   CarteiraRepository carteiraRepository = CarteiraRepository();
 
-  findById (int id) async {
+  Future<Aluno?> findById (int id) async {
+
       db = await DB.instance.database;
+
       List alunos = await db.query('aluno', where: 'id = $id');
+      
+      Carteira carteira = carteiraRepository.findByAlunoId(id);
 
-      return null;
+      List<Historico> historico = historicoRepository.getByAlunoId(id);
+
+      if(alunos.isNotEmpty){
+        return createAluno(alunos, carteira, historico);
+      }
+
+      throw("Não existe aluno com o ID informado");
   }
 
-  findByRA (String ra) async {
+  Future<Aluno> findByRA (String ra) async {
       db = await DB.instance.database;
-      List aluno = await db.query('aluno', where: 'ra = $ra');
-      return aluno.first;
+
+      List alunos = await db.query('aluno', where: 'ra = ${ra}');
+      
+      Carteira carteira = await carteiraRepository.findByAlunoId(alunos.first["id"]);
+
+      List<Historico> historico = await historicoRepository.getByAlunoId(alunos.first["id"]);
+
+      if(alunos.isNotEmpty){
+        return createAluno(alunos, carteira, historico);
+      }
+
+      throw("Não existe aluno com o RA informado");
   }
 
-  get () async {
-      db = await DB.instance.database;
-      List alunos = await db.query('aluno');
-      return alunos;
+  createAluno(alunos, carteira, historico) {
+        return Aluno(
+          id: alunos.first['id'],
+          nome: alunos.first['nome'],
+          ra: alunos.first['ra'],
+          senha: alunos.first['senha'],
+          carteira: carteira,
+          historico: historico,
+          imagePath: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+        );
   }
 
   static List<Aluno> lista = [
@@ -42,16 +68,16 @@ class AlunoRepository extends ChangeNotifier {
         nome: 'João Victor',
         ra: '123',
         senha: '1234',
-        carteira: Carteira(id: 1, saldo: 1),
+        carteira: Carteira(alunoId: 1, id: 1, saldo: 1),
         historico: [
-          Historico(id: 1, data: '9/03/2022', refeicao: 'Jantar'),
-          Historico(id: 2, data: '9/03/2022', refeicao: 'Almoço'),
-          Historico(id: 3, data: '10/03/2022', refeicao: 'Jantar'),
-          Historico(id: 4, data: '10/03/2022', refeicao: 'Almoço'),
-          Historico(id: 5, data: '11/03/2022', refeicao: 'Jantar'),
-          Historico(id: 6, data: '11/03/2022', refeicao: 'Almoço'),
-          Historico(id: 7, data: '12/03/2022', refeicao: 'Jantar'),
-          Historico(id: 8, data: '12/03/2022', refeicao: 'Almoço'),
+          Historico(alunoId: 1, id: 1, data: '9/03/2022', refeicao: 'Jantar'),
+          Historico(alunoId: 1, id: 2, data: '9/03/2022', refeicao: 'Almoço'),
+          Historico(alunoId: 1, id: 3, data: '10/03/2022', refeicao: 'Jantar'),
+          Historico(alunoId: 1, id: 4, data: '10/03/2022', refeicao: 'Almoço'),
+          Historico(alunoId: 1, id: 5, data: '11/03/2022', refeicao: 'Jantar'),
+          Historico(alunoId: 1, id: 6, data: '11/03/2022', refeicao: 'Almoço'),
+          Historico(alunoId: 1, id: 7, data: '12/03/2022', refeicao: 'Jantar'),
+          Historico(alunoId: 1, id: 8, data: '12/03/2022', refeicao: 'Almoço'),
         ],
         imagePath:
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"),
@@ -60,16 +86,16 @@ class AlunoRepository extends ChangeNotifier {
         nome: 'Alysson Victor',
         ra: '234567',
         senha: '1234',
-        carteira: Carteira(id:1, saldo: 100),
+        carteira: Carteira(alunoId: 2, id:1, saldo: 100),
         historico: [
-          Historico(id: 9, data: '12/03/2022', refeicao: 'Jantar'),
-          Historico(id: 10, data: '12/03/2022', refeicao: 'Almoço'),
-          Historico(id: 11, data: '11/03/2022', refeicao: 'Jantar'),
-          Historico(id: 12, data: '11/03/2022', refeicao: 'Almoço'),
-          Historico(id: 13, data: '10/03/2022', refeicao: 'Jantar'),
-          Historico(id: 14, data: '10/03/2022', refeicao: 'Almoço'),
-          Historico(id: 15, data: '09/03/2022', refeicao: 'Jantar'),
-          Historico(id: 16, data: '09/03/2022', refeicao: 'Almoço'),
+          Historico(alunoId: 2, id: 9, data: '12/03/2022', refeicao: 'Jantar'),
+          Historico(alunoId: 2, id: 10, data: '12/03/2022', refeicao: 'Almoço'),
+          Historico(alunoId: 2, id: 11, data: '11/03/2022', refeicao: 'Jantar'),
+          Historico(alunoId: 2, id: 12, data: '11/03/2022', refeicao: 'Almoço'),
+          Historico(alunoId: 2, id: 13, data: '10/03/2022', refeicao: 'Jantar'),
+          Historico(alunoId: 2, id: 14, data: '10/03/2022', refeicao: 'Almoço'),
+          Historico(alunoId: 2, id: 15, data: '09/03/2022', refeicao: 'Jantar'),
+          Historico(alunoId: 2, id: 16, data: '09/03/2022', refeicao: 'Almoço'),
         ],
         imagePath:
             "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
