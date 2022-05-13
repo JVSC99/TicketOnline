@@ -40,7 +40,7 @@ class DB {
       'carteira',
       {
         "alunoId": 1,
-        "saldo": 20
+        "saldo": 5
       }
     );
   }

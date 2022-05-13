@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_online/model/historico.dart';
 
 Expanded HistoricoList(BuildContext context, lista) {
+  
   return Expanded(
     child: Card(
       child: ListView.separated(

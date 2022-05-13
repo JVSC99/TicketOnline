@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_online/pages/components/saldo.dart';
-import 'package:ticket_online/repositories/aluno_repository.dart';
 import 'package:ticket_online/model/aluno.dart';
 
 import 'components/historico.dart';
@@ -18,8 +17,10 @@ class WalletPage extends StatefulWidget {
 }
 
 class WalletPageState extends State<WalletPage> {
+
   @override
   Widget build(BuildContext context) {
+
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -34,7 +34,7 @@ class HomePageState extends State<HomePage> {
               IconButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                        MaterialPageRoute(builder: (context) => ProfilePage(aluno: widget.aluno)));
                   },
                   icon: Icon(Icons.account_circle_outlined))
             ],

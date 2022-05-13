@@ -72,12 +72,6 @@ class AlunoRepository extends ChangeNotifier {
           );
 
           carteiraRepository.save(aluno.carteira);
-
-          if(aluno.historico.isNotEmpty){
-            for(int i = 0; i < aluno.historico.length; i++){
-              historicoRepository.save(aluno.historico[i]);
-            }
-          }
       }else{
         int alunoId = await db.insert(
           'aluno', {

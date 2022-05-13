@@ -35,7 +35,7 @@ class PagarPageState extends State<PagarPage> {
         if (widget.aluno.carteira.saldo > 0) {
           widget.pagarController.pagarRefeicao(widget.aluno).then((value) => {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text('Pagamento realizado com sucesso'),
+            content: Text('Pagamento realizado com sucesso'),
               backgroundColor: Colors.green,
             ))
           });
