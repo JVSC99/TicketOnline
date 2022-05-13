@@ -83,6 +83,15 @@ class AlunoRepository extends ChangeNotifier {
           'ra': aluno.ra,
           'senha': aluno.senha
         });
+
+        carteiraRepository.save(
+          Carteira(
+            id: 0,
+            alunoId: alunoId,
+            saldo: 0
+          ), 
+          alunoId
+        );
       }
     }catch(error){
         throw(error.toString());  
