@@ -105,23 +105,26 @@ class LoginPage extends StatelessWidget {
                   onPressed: () {
                     try{
                       loginController.validarLogin(login, senha).then((aluno) => {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('Login realizado com sucesso'),
-                          backgroundColor: Colors.green,
-                          )),
+                          if(aluno != null){
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Login realizado com sucesso'),
+                            backgroundColor: Colors.green,
+                            )),
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                               return HomePage(aluno: aluno);
                           }))
+                          }else{
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text("Senha ou RA inválido"),
+                                 backgroundColor: Colors.red,
+                              ),
+                            )
+                          }
                       });
-
                     }catch (error) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(error.toString()),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
+                      print(error.toString());
                     }
                   },
                   shape: RoundedRectangleBorder(

@@ -20,7 +20,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class ProfilePageState extends State<ProfilePage> {
-  final alunos = AlunoRepository.lista;
   final rightAppBaricon = Icons.notifications_none;
   final leading = BackButton();
 

@@ -5,7 +5,7 @@ class LoginController {
   
   AlunoRepository alunoRepository = AlunoRepository();
 
-  Future<Aluno> validarLogin(String ra, String senha) async {
+  Future<Aluno?> validarLogin(String ra, String senha) async {
     
     try {
       Aluno aluno = await alunoRepository.findByRA(ra);
@@ -18,7 +18,7 @@ class LoginController {
       print(error.toString());
     }
 
-    throw("Senha ou RA inválido");
+    return null;
   }
   
 }

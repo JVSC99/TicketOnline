@@ -66,12 +66,11 @@ class ComprarPageState extends State<ComprarPage> {
                 onPressed: () {
                   widget.comprarController.buscarId().then((result) => {
                       setState(() {
-                      resultado = result.status.toString();
-
-                      if (resultado == 'null') {
+                    
+                      if (result == 0) {
                         resultado = 'cancelada';
                         cor = Colors.red;
-                      } else if (resultado == 'approved') {
+                      } else if (result == 1) {
                         widget.aluno.carteira.saldo += 1;
                         
                         widget.alunoRepository.save(widget.aluno);
