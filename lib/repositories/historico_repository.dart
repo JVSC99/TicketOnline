@@ -16,7 +16,7 @@ class HistoricoRepository extends ChangeNotifier {
       List historico = await db.query('historico', where: 'id = $id');
        
       if(historico.isNotEmpty){
-        return _createHistorico(historico);
+        return _createHistorico(historico.first);
       }
 
       throw("Não existe carteira com o ID informado");
@@ -77,10 +77,10 @@ class HistoricoRepository extends ChangeNotifier {
 
   _createHistorico(historico){
     return Historico(
-        id: historico.first['id'],
-        alunoId: historico.first['alunoId'],
-        data: historico.first['data'],
-        refeicao: historico.first['refeicao']
+        id: historico['id'],
+        alunoId: historico['alunoId'],
+        data: historico['data'],
+        refeicao: historico['refeicao']
     );
   }
 }
