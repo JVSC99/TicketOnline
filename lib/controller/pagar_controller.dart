@@ -12,10 +12,11 @@ class PagarController {
   CarteiraRepository carteiraRepository = CarteiraRepository();
   HistoricoRepository historicoRepository = HistoricoRepository();
 
-  Future<void> pagarRefeicao(Aluno aluno) async {
+  Future<Aluno> pagarRefeicao(Aluno aluno) async {
      aluno.carteira.saldo -= 1;
      await historicoRepository.save(criarHistorico(aluno.id));
      await alunoRepository.save(aluno);
+     return await alunoRepository.findById(aluno.id);
   }
 
   criarHistorico (alunoId) {

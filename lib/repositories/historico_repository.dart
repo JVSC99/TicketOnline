@@ -50,7 +50,7 @@ class HistoricoRepository extends ChangeNotifier {
 
       try{
         Historico historicoExistente = await findById(historico.id);
-
+      
         db.update(
           'historico', 
           {

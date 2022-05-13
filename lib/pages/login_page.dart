@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ticket_online/pages/home_page.dart';
-import 'package:ticket_online/model/aluno.dart';
 import 'package:ticket_online/controller/login_controller.dart';
 
 class LoginPage extends StatelessWidget {

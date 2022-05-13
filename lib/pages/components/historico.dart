@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 Expanded HistoricoList(BuildContext context, lista) {
+  print(lista.length);
   return Expanded(
     child: Card(
       child: ListView.separated(
