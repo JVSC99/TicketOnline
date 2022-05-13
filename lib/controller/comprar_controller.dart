@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class ComprarController {
 
-  Future<int> buscarId() async {
+  Future<PaymentResult> buscarId() async {
     String uri = 'https://api.mercadopago.com/checkout/preferences?access_token=TEST-4453779879566105-041022-7c4448f2d15aa1b16d98ab85663d936e-316925024';
     
     var response = await http.post(Uri.parse(uri),
@@ -20,7 +20,7 @@ class ComprarController {
               "title": "Refeição RU",
               "description": "Refeição RU",
               "quantity": 1,
-              "currency_id": "/BRL",
+              "currency_id": "BRL",
               "unit_price": 3.50
             }
           ],
@@ -31,12 +31,12 @@ class ComprarController {
     
     String id = json.toString();
 
-    // PaymentResult result = await MercadoPagoMobileCheckout.startCheckout(
-    //   "TEST-cab429de-82f7-49a2-8309-6c6b7b5aea5e",
-    //   id,
-    // );
+    PaymentResult result = await MercadoPagoMobileCheckout.startCheckout(
+      "TEST-cab429de-82f7-49a2-8309-6c6b7b5aea5e",
+      id,
+    );
 
-    return 1;
+    return result;
   }
   
 }
