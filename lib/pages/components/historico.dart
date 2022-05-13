@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 Expanded HistoricoList(BuildContext context, lista) {
-  
   return Expanded(
     child: Card(
       child: ListView.separated(
-          reverse: true,
+          reverse: false,
           itemBuilder: (BuildContext context, int id) => ListTile(
                 leading: Text(lista[id].refeicao),
                 trailing: Text(lista[id].data),

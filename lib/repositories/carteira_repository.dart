@@ -48,7 +48,7 @@ class CarteiraRepository extends ChangeNotifier {
 
         db.update(
           'carteira', 
-          {'saldo': carteiraExistente.saldo},
+          {'saldo': carteira.saldo},
           where: 'id = ?',
           whereArgs: [carteiraExistente.id]
         );

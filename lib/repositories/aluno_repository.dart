@@ -105,43 +105,4 @@ class AlunoRepository extends ChangeNotifier {
           imagePath: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
         );
   }
-
-  static List<Aluno> lista = [
-    Aluno(
-        id: 1,
-        nome: 'João Victor',
-        ra: '123',
-        senha: '1234',
-        carteira: Carteira(alunoId: 1, id: 1, saldo: 1),
-        historico: [
-          Historico(alunoId: 1, id: 1, data: '9/03/2022', refeicao: 'Jantar'),
-          Historico(alunoId: 1, id: 2, data: '9/03/2022', refeicao: 'Almoço'),
-          Historico(alunoId: 1, id: 3, data: '10/03/2022', refeicao: 'Jantar'),
-          Historico(alunoId: 1, id: 4, data: '10/03/2022', refeicao: 'Almoço'),
-          Historico(alunoId: 1, id: 5, data: '11/03/2022', refeicao: 'Jantar'),
-          Historico(alunoId: 1, id: 6, data: '11/03/2022', refeicao: 'Almoço'),
-          Historico(alunoId: 1, id: 7, data: '12/03/2022', refeicao: 'Jantar'),
-          Historico(alunoId: 1, id: 8, data: '12/03/2022', refeicao: 'Almoço'),
-        ],
-        imagePath:
-            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"),
-    Aluno(
-        id: 1,
-        nome: 'Alysson Victor',
-        ra: '234567',
-        senha: '1234',
-        carteira: Carteira(alunoId: 2, id:1, saldo: 100),
-        historico: [
-          Historico(alunoId: 2, id: 9, data: '12/03/2022', refeicao: 'Jantar'),
-          Historico(alunoId: 2, id: 10, data: '12/03/2022', refeicao: 'Almoço'),
-          Historico(alunoId: 2, id: 11, data: '11/03/2022', refeicao: 'Jantar'),
-          Historico(alunoId: 2, id: 12, data: '11/03/2022', refeicao: 'Almoço'),
-          Historico(alunoId: 2, id: 13, data: '10/03/2022', refeicao: 'Jantar'),
-          Historico(alunoId: 2, id: 14, data: '10/03/2022', refeicao: 'Almoço'),
-          Historico(alunoId: 2, id: 15, data: '09/03/2022', refeicao: 'Jantar'),
-          Historico(alunoId: 2, id: 16, data: '09/03/2022', refeicao: 'Almoço'),
-        ],
-        imagePath:
-            "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
-  ];
 }
