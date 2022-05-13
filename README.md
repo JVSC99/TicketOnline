@@ -12,6 +12,11 @@ Projeto voltado para automatização de um problema real, diversas faculdades te
 
 O app tem como Objetivo funcionar como um bilhete de ônibus onde podemos carregar com quantidades de tickets, porém voltado para a alimentação dos estudantes nos restaurantes universitários.
 
+#### Instruções de uso
+
+Para realizar o login, utilizar conta que é gerada ao utilizar o app "ra": "111111" e "senha": "Aluno22@22"
+Para realizar uma compra de refeição, o QR escaneado deve representar o valor 10 (https://br.qr-code-generator.com/)
+Para realizar uma compra de ticket você deve usar um dos cartões de teste do ML https://www.mercadopago.com.br/developers/pt/docs/checkout-api/integration-test/test-cards
 
 #### Bibliotecas utilizadas:
 
