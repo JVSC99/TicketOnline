@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_online/pages/components/historico.dart';
-import 'package:ticket_online/pages/comprar_page.dart';
-import 'package:ticket_online/pages/home_page.dart';
 import 'login_page.dart';
 import 'components/app_bar.dart';
 import 'components/profile_widget.dart';
@@ -11,6 +8,11 @@ import '../repositories/aluno_repository.dart';
 import '../../model/aluno.dart';
 
 class ProfilePage extends StatefulWidget {
+
+  Aluno aluno;
+
+  ProfilePage({Key? key, required this.aluno}):super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return ProfilePageState();
@@ -18,7 +20,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class ProfilePageState extends State<ProfilePage> {
-  final alunos = AlunoRepository.lista;
   final rightAppBaricon = Icons.notifications_none;
   final leading = BackButton();
 
@@ -33,16 +34,16 @@ class ProfilePageState extends State<ProfilePage> {
           physics: BouncingScrollPhysics(),
           children: [
             ProfileWidget(
-              imagePath: alunos[0].imagePath,
+              imagePath: widget.aluno.imagePath,
               onClicked: () async {},
             ),
             const SizedBox(height: 24),
-            buildName(alunos[0]),
-            buildRA(alunos[0]),
-            Saldo(context, alunos[0].carteira.saldo),
+            buildName(widget.aluno),
+            buildRA(widget.aluno),
+            Saldo(context, widget.aluno.carteira.saldo),
             SingleChildScrollView(
                 child: SizedBox(
-                    height: 200, child: HistoricoList(context, alunos))),
+                    height: 200, child: HistoricoList(context, widget.aluno.historico))),
             buildLogoutButton(),
           ],
         ),

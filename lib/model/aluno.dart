@@ -2,6 +2,7 @@ import 'carteira.dart';
 import 'historico.dart';
 
 class Aluno {
+  int id;
   String nome;
   String ra;
   String senha;
@@ -10,6 +11,7 @@ class Aluno {
   String imagePath;
 
   Aluno({
+    required this.id,
     required this.nome,
     required this.ra,
     required this.senha,

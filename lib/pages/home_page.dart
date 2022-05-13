@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_online/model/aluno.dart';
 import 'package:ticket_online/pages/comprar_page.dart';
@@ -6,9 +5,12 @@ import 'package:ticket_online/pages/components/saldo.dart';
 import 'package:ticket_online/pages/pagar_pages.dart';
 import 'package:ticket_online/pages/profile_page.dart';
 import 'package:ticket_online/pages/wallet_page.dart';
-import 'package:ticket_online/repositories/aluno_repository.dart';
 
 class HomePage extends StatefulWidget {
+  Aluno aluno;
+
+  HomePage({Key? key, required this.aluno}): super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return HomePageState();
@@ -20,7 +22,6 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final lista = AlunoRepository.lista;
 
     return DefaultTabController(
       length: 3,
@@ -28,12 +29,12 @@ class HomePageState extends State<HomePage> {
           appBar: AppBar(
             elevation: 20,
             backgroundColor: Colors.orange,
-            title: Text(lista[0].nome),
+            title: Text(widget.aluno.nome),
             actions: [
               IconButton(
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                        MaterialPageRoute(builder: (context) => ProfilePage(aluno: widget.aluno)));
                   },
                   icon: Icon(Icons.account_circle_outlined))
             ],
@@ -58,23 +59,23 @@ class HomePageState extends State<HomePage> {
           ),
           body: TabBarView(
             children: [
-              buildPage('Wallet'),
-              buildPage('Pagar'),
-              buildPage('Comprar'),
+              buildPage('Wallet', widget.aluno),
+              buildPage('Pagar', widget.aluno),
+              buildPage('Comprar', widget.aluno),
             ],
           )),
     );
   }
 
-  Widget buildPage(String text) {
+  Widget buildPage(String text, Aluno aluno) {
     if (text == 'Wallet') {
-      return WalletPage();
+      return WalletPage(aluno: aluno);
     }
     if (text == 'Pagar') {
-      return PagarPage();
+      return PagarPage(aluno: aluno);
     }
     if (text == 'Comprar') {
-      return ComprarPage();
+      return ComprarPage(aluno: aluno);
     }
 
     return Padding(

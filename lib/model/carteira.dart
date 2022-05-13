@@ -1,9 +1,11 @@
 class Carteira {
+  int id;
+  int alunoId;
   double saldo;
-  String id;
-
+  
   Carteira({
-    required this.saldo,
     required this.id,
+    required this.alunoId,
+    required this.saldo,
   });
 }
