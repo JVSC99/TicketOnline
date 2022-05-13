@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_online/pages/components/historico.dart';
-import 'package:ticket_online/pages/comprar_page.dart';
-import 'package:ticket_online/pages/home_page.dart';
 import 'login_page.dart';
 import 'components/app_bar.dart';
 import 'components/profile_widget.dart';

@@ -75,7 +75,7 @@ class HomePageState extends State<HomePage> {
       return PagarPage(aluno: aluno);
     }
     if (text == 'Comprar') {
-      return ComprarPage();
+      return ComprarPage(aluno: aluno);
     }
 
     return Padding(

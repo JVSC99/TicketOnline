@@ -28,6 +28,7 @@ class AlunoRepository extends ChangeNotifier {
       List<Historico> historico = await historicoRepository.getByAlunoId(id);
 
       if(alunos.isNotEmpty){
+        notifyListeners();
         return createAluno(alunos, carteira, historico);
       }
 
@@ -38,12 +39,13 @@ class AlunoRepository extends ChangeNotifier {
       db = await DB.instance.database;
 
       List alunos = await db.query('aluno', where: 'ra = ${ra}');
-      
+
       Carteira carteira = await carteiraRepository.findByAlunoId(alunos.first["id"]);
 
       List<Historico> historico = await historicoRepository.getByAlunoId(alunos.first["id"]);
 
       if(alunos.isNotEmpty){
+        notifyListeners();
         return createAluno(alunos, carteira, historico);
       }
 
@@ -95,6 +97,7 @@ class AlunoRepository extends ChangeNotifier {
     }catch(error){
         throw(error.toString());  
     }
+    notifyListeners();
   }
 
   createAluno(alunos, carteira, historico) {

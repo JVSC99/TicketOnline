@@ -102,25 +102,23 @@ class LoginPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(32.0),
                 child: MaterialButton(
-                  onPressed: () async {
-
+                  onPressed: () {
                     try{
-
-                      Aluno aluno = await loginController.validarLogin(login, senha);
-
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Login realizado com sucesso'),
-                        backgroundColor: Colors.green,
-                      ));
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                          return HomePage(aluno: aluno);
-                      }));
+                      loginController.validarLogin(login, senha).then((aluno) => {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Login realizado com sucesso'),
+                          backgroundColor: Colors.green,
+                          )),
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                              return HomePage(aluno: aluno);
+                          }))
+                      });
 
                     }catch (error) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Senha ou RA inválido'),
+                          content: Text(error.toString()),
                           backgroundColor: Colors.red,
                         ),
                       );

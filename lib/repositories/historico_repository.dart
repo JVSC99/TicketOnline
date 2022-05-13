@@ -16,6 +16,7 @@ class HistoricoRepository extends ChangeNotifier {
       List historico = await db.query('historico', where: 'id = $id');
        
       if(historico.isNotEmpty){
+        notifyListeners();
         return _createHistorico(historico.first);
       }
 
@@ -37,7 +38,7 @@ class HistoricoRepository extends ChangeNotifier {
         }
 
       }
-      
+      notifyListeners();
       return historicos;
   }
 
@@ -72,7 +73,7 @@ class HistoricoRepository extends ChangeNotifier {
         'data': historico.data
       });
     }
-
+    notifyListeners();
   }
 
   _createHistorico(historico){

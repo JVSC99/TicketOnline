@@ -17,6 +17,7 @@ class CarteiraRepository extends ChangeNotifier {
       List carteira = await db.query('carteira', where: 'id = $id');
        
       if(carteira.isNotEmpty){
+        notifyListeners();
         return _createCarteira(carteira);
       }
 
@@ -29,6 +30,7 @@ class CarteiraRepository extends ChangeNotifier {
       List carteira = await db.query('carteira', where: 'id = $id');
        
       if(carteira.isNotEmpty){
+        notifyListeners();
         return _createCarteira(carteira);
       }
 
@@ -62,7 +64,7 @@ class CarteiraRepository extends ChangeNotifier {
         'saldo': carteira.saldo
       });
     }
-
+    notifyListeners();
   }
 
   _createCarteira(carteira) {

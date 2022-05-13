@@ -21,7 +21,6 @@ class DB {
       join(await getDatabasesPath(), "ticket.db"),
       version: 1,
       onCreate: _onCreate,
-
     );
   }
 
@@ -42,14 +41,6 @@ class DB {
       {
         "alunoId": 1,
         "saldo": 20
-      }
-    );
-    await db.insert(
-      'historico',
-      {
-        "alunoId": 1,
-        "data": "20220511",
-        "refeicao": "almoco"
       }
     );
   }

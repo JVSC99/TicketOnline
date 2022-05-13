@@ -3,10 +3,12 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:ticket_online/pages/components/saldo.dart';
 import 'package:ticket_online/model/aluno.dart';
 import 'package:ticket_online/controller/pagar_controller.dart';
+import 'package:ticket_online/repositories/aluno_repository.dart';
 
 class PagarPage extends StatefulWidget {
   Aluno aluno;
   PagarController pagarController = PagarController();
+  AlunoRepository alunoRepository = AlunoRepository();
 
   PagarPage({Key? key, required this.aluno}): super(key: key);
 
@@ -29,13 +31,15 @@ class PagarPageState extends State<PagarPage> {
     );
 
     if (code == '10') {
-      setState(() async {
+      setState(() {
         if (widget.aluno.carteira.saldo > 0) {
-          await widget.pagarController.pagarRefeicao(widget.aluno);
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('Pagamento realizado com sucesso'),
-            backgroundColor: Colors.green,
-          ));
+          widget.pagarController.pagarRefeicao(widget.aluno).then((value) => {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Pagamento realizado com sucesso'),
+              backgroundColor: Colors.green,
+            ))
+          });
+          
         } else {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Saldo insuficiente'),
