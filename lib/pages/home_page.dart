@@ -72,7 +72,7 @@ class HomePageState extends State<HomePage> {
       return WalletPage(aluno: aluno);
     }
     if (text == 'Pagar') {
-      return PagarPage();
+      return PagarPage(aluno: aluno);
     }
     if (text == 'Comprar') {
       return ComprarPage();

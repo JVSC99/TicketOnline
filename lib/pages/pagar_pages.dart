@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:flutter/services.dart';
-import 'package:ticket_online/model/historico.dart';
 import 'package:ticket_online/pages/components/saldo.dart';
-import 'package:ticket_online/repositories/aluno_repository.dart';
+import 'package:ticket_online/model/aluno.dart';
+import 'package:ticket_online/controller/pagar_controller.dart';
 
 class PagarPage extends StatefulWidget {
+  Aluno aluno;
+  PagarController pagarController = PagarController();
+
+  PagarPage({Key? key, required this.aluno}): super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return PagarPageState();
@@ -13,11 +17,8 @@ class PagarPage extends StatefulWidget {
 }
 
 class PagarPageState extends State<PagarPage> {
-  final alunos = AlunoRepository.lista;
-  final date = DateTime.now();
   final _form = GlobalKey<FormState>();
   final _valor = TextEditingController();
-  int qtd = 1;
 
   readQRcode() async {
     String code = await FlutterBarcodeScanner.scanBarcode(
@@ -28,17 +29,9 @@ class PagarPageState extends State<PagarPage> {
     );
 
     if (code == '10') {
-      setState(() {
-        if (AlunoRepository.lista[0].carteira.saldo > 0) {
-          AlunoRepository.lista[0].carteira.saldo -= qtd;
-          AlunoRepository.lista[0].historico.add(
-            Historico(
-                id: 1,
-                alunoId: 1,
-                data:
-                    '${date.day}/${date.month}/${date.year} ${date.hour - 3}:${date.minute}',
-                refeicao: (date.hour - 3 < 14) ? 'Almoço ' : 'Jantar '),
-          );
+      setState(() async {
+        if (widget.aluno.carteira.saldo > 0) {
+          await widget.pagarController.pagarRefeicao(widget.aluno);
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('Pagamento realizado com sucesso'),
             backgroundColor: Colors.green,
@@ -60,7 +53,7 @@ class PagarPageState extends State<PagarPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Saldo(context, alunos[0].carteira.saldo),
+            Saldo(context, widget.aluno.carteira.saldo),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.only(top: 24),
