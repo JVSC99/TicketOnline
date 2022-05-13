@@ -69,11 +69,11 @@ class AlunoRepository extends ChangeNotifier {
             whereArgs: [alunoExistente.id]
           );
 
-          carteiraRepository.save(aluno.carteira, aluno.id);
+          carteiraRepository.save(aluno.carteira);
 
           if(aluno.historico.isNotEmpty){
             for(int i = 0; i < aluno.historico.length; i++){
-              historicoRepository.save(aluno.historico[i], aluno.id);
+              historicoRepository.save(aluno.historico[i]);
             }
           }
       }else{
