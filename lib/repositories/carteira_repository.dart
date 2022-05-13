@@ -35,7 +35,7 @@ class CarteiraRepository extends ChangeNotifier {
       throw("Não existe carteira com o ID informado");
   }
 
-  Future<void> save(Carteira carteira, int alunoId) async {
+  Future<void> save(Carteira carteira) async {
 
     db = await DB.instance.database;      
 
@@ -58,7 +58,7 @@ class CarteiraRepository extends ChangeNotifier {
     }else{
       db.insert(
         'carteira', {
-        'alunoId': alunoId,
+        'alunoId': carteira.alunoId,
         'saldo': carteira.saldo
       });
     }

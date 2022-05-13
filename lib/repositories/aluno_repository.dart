@@ -89,8 +89,7 @@ class AlunoRepository extends ChangeNotifier {
             id: 0,
             alunoId: alunoId,
             saldo: 0
-          ), 
-          alunoId
+          )
         );
       }
     }catch(error){

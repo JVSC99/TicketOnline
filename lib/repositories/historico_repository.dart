@@ -41,7 +41,7 @@ class HistoricoRepository extends ChangeNotifier {
       return historicos;
   }
 
-  Future<void> save(Historico historico, int alunoId) async {
+  Future<void> save(Historico historico) async {
 
     db = await DB.instance.database;      
 
@@ -67,7 +67,7 @@ class HistoricoRepository extends ChangeNotifier {
     }else{
       db.insert(
         'historico', {
-        'alunoId': alunoId,
+        'alunoId': historico.alunoId,
         'refeicao': historico.refeicao,
         'data': historico.data
       });
