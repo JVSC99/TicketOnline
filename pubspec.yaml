@@ -32,6 +32,7 @@ dependencies:
 
   flutter_barcode_scanner: ^2.0.0
   pay: ^1.0.8
+  pay_android: ^1.0.7
   mercado_pago_mobile_checkout: ^0.1.1
   http: ^0.13.4
   sqflite: 2.0.2+1
